@@ -2,6 +2,9 @@ use std::io;
 use rand::Rng;
 use std::cmp::Ordering;
 
+
+
+
 fn main() {
     println!("Guess the number!");
 
@@ -17,8 +20,8 @@ fn main() {
         let mut guess = String::new();
 
         io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to read line");
+            .read_line(&mut guess)
+            .expect("Failed to read line");
 
     
         let guess:u32 = match guess.trim().parse(){
@@ -39,6 +42,11 @@ fn main() {
             }
         }
     }
+    let guess:i32 = "42".parse().expect("not a number");
+    println!("the guess :{guess}");
+
+    let float_v = 5.0;
+    let float_v32: f32 = 3.0;
 
     
 }
