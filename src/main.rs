@@ -10,40 +10,11 @@ fn main() {
 
     concept();
 
-    let secret_number = rand::thread_rng().gen_range(1..=100);
+    let s1 = gives_ownership();
 
-    println!("The secret number is:{}",secret_number);
+    let s2 = String::from("hello");
 
-    loop{
-        println!("Please input your guess.");
-
-        let mut guess = String::new();
-
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line");
-
-    
-        let guess:u32 = match guess.trim().parse(){
-            Ok(num) => num,
-            Err(_) => continue,
-        };
-
-        println!("You guessed:{guess}");
-
-        // strong and static type system
-        match guess.cmp(&secret_number){
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big !"),
-            Ordering::Equal => {
-                println!("You win!");
-                break;
-
-            }
-        }
-    }
-    let guess:i32 = "42".parse().expect("not a number");
-    println!("the guess :{guess}");
+    let s3 = takes_and_give_back(s2);
 
 
     
@@ -55,4 +26,15 @@ fn concept()
     let s_copy = s_origin; // move
     
     println!("{}",s_copy);
+}
+
+
+fn gives_ownership()->String{
+
+    let some_string = String::from("yours");
+    some_string
+}
+
+fn takes_and_give_back(a_string:String)->String{
+    a_string
 }
