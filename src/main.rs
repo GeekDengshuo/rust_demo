@@ -4,37 +4,17 @@ use std::cmp::Ordering;
 
 
 
-
-fn main() {
-    println!("Guess the number!");
-
-    concept();
-
-    let s1 = gives_ownership();
-
-    let s2 = String::from("hello");
-
-    let s3 = takes_and_give_back(s2);
-
-
-    
-}
-
-fn concept()
+fn main()
 {
-    let s_origin = String::from("hello");
-    let s_copy = s_origin; // move
-    
-    println!("{}",s_copy);
+    println!("please guess the number!");
+
+    println!("please intput the number:");
+
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        //.expect("Failed to read line");
+    println!("you guessed:{guess}");
 }
 
-
-fn gives_ownership()->String{
-
-    let some_string = String::from("yours");
-    some_string
-}
-
-fn takes_and_give_back(a_string:String)->String{
-    a_string
-}
