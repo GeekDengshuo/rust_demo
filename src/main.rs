@@ -10,9 +10,11 @@ fn main()
 {
     //guess_num();
     ownership();
+    ownership_reference();
 
 }
-fn guess_num(){
+fn guess_num()
+{
 
     println!("Guess the number!");
 
@@ -47,13 +49,36 @@ fn guess_num(){
     println!("The random secret number:{random_num}");
 }
 
-fn ownership(){
+fn ownership()
+{
     let str1 = String::from("hello world");
     // let str2 = str1;               // shadow copy will free str1
     let str2 = str1.clone();  // deep copy
 
     println!("The string is {str1}");
 
-    
+
 }
 
+fn ownership_reference()
+{
+    let str1 = String::from("hello");
+    let len = calculate_length(&str1);
+    change(&str1);
+
+    println!("the length of {} ,is {}",str1,len);
+
+
+}
+fn calculate_length(s:&String) -> usize
+{
+    s.len()
+}
+
+/*
+// cannot borrow `*str` as mutable, as it is behind a `&` reference
+fn change(str:&String)
+{
+    str.push_str(",world");
+}
+*/
