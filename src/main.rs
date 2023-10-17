@@ -12,6 +12,12 @@ fn main()
     ownership();
     ownership_reference();
 
+    let a = [1,2,3,4,5];
+
+    let slice = &a[1..3];
+
+    assert_eq!(slice,&[2,3]);
+
 }
 fn guess_num()
 {
@@ -64,7 +70,7 @@ fn ownership_reference()
 {
     let str1 = String::from("hello");
     let len = calculate_length(&str1);
-    change(&str1);
+    //change(&str1);
 
     println!("the length of {} ,is {}",str1,len);
 
@@ -82,3 +88,34 @@ fn change(str:&String)
     str.push_str(",world");
 }
 */
+fn dangle() -> String
+{
+    let s = String::from("hello");
+    
+    s  // move
+}
+
+fn first_word(s: &String) -> usize
+{
+    let bytes = s.as_bytes();
+
+    for(i,&item) in bytes.iter().enumerate(){
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
+}
+
+fn first_word2(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
