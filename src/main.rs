@@ -18,6 +18,18 @@ fn main()
 
     assert_eq!(slice,&[2,3]);
 
+    let rect = Rectangle{
+        width: 30,
+        height: 20,
+    };
+
+    println!("rect is {:#?}",rect);
+
+}
+#[derive(Debug)]
+struct Rectangle{
+    width: u32,
+    height: u32,
 }
 fn guess_num()
 {
