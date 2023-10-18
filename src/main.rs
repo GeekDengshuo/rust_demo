@@ -24,12 +24,19 @@ fn main()
     };
 
     println!("rect is {:#?}",rect);
+    println!{"rect area is {}",rect.area()};
 
 }
 #[derive(Debug)]
 struct Rectangle{
     width: u32,
     height: u32,
+}
+
+impl Rectangle{
+    fn area(&self) -> u32{
+        self.width * self.height
+    }
 }
 fn guess_num()
 {
