@@ -17,15 +17,29 @@ fn main()
     let slice = &a[1..3];
 
     assert_eq!(slice,&[2,3]);
-
+    let scale = 2;
     let rect = Rectangle{
-        width: 30,
+        width: dbg!(scale * 30),               // dbg!() is useful for debug [src/main.rs:22] scale * 30 = 60
         height: 20,
     };
 
     println!("rect is {:#?}",rect);
     println!{"rect area is {}",rect.area()};
 
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
+
+    println!("Option<T> six  {:#?},none  {:#?}",six,none);
+
+}
+
+fn plus_one(x:Option<u32>) -> Option<u32>
+{
+    match x {
+        None => None,
+        Some(i) => Some(i+1),
+    }
 }
 #[derive(Debug)]
 struct Rectangle{
@@ -34,8 +48,20 @@ struct Rectangle{
 }
 
 impl Rectangle{
+
+    // method
     fn area(&self) -> u32{
         self.width * self.height
+    }
+    fn can_hold(&self,other:&Rectangle) -> bool{
+        self.width > other.width && self.height > other.height
+    }
+    fn width(&self) -> bool{
+        self.width > 0
+    }
+    //associated functions
+    fn square(size: u32) -> Self{
+        Self { width: size, height: size }
     }
 }
 fn guess_num()
