@@ -1,3 +1,4 @@
+use std::thread;
 
 fn main()
 {
@@ -8,9 +9,34 @@ fn main()
     
     for user_pref in user_preferences{
         let giveaway = store.giveaway(user_pref);
-        println!("The user with perference {:?} get {:?}",
+        println!("The user with preference {:?} get {:?}",
         user_pref,giveaway);
     }
+
+    let example_closure = |x| x;
+    let _s = example_closure(String::from("hello"));
+    //let n = example_closure(5);
+
+    let mut mutable_list = vec![1,2,3];
+    println!("Before defining closure: {:?}",mutable_list);
+
+    let mut mut_borrows = || mutable_list.push(4);
+
+    //println!("Before calling closure:{:?}",mutable_list);
+
+    mut_borrows();
+
+    println!("After calling closure:{:?}",mutable_list);
+
+
+    let list = vec![1,2,3,4,5];
+    println!("Before defining closure:{:?}",list);
+    // move can force get ownership
+    thread::spawn(move || println!("From thread : {:?}",list))
+        .join()
+        .unwrap();
+
+
 }
 #[derive(Debug,PartialEq,Copy,Clone)]
 enum ShirtColor {
@@ -23,8 +49,8 @@ struct Inventory{
 }
 
 impl Inventory{
-    fn giveaway(&self,user_perference: Option<ShirtColor>) -> ShirtColor{
-        user_perference.unwrap_or_else(|| self.most_stocked())
+    fn giveaway(&self,user_preference: Option<ShirtColor>) -> ShirtColor{
+        user_preference.unwrap_or_else(|| self.most_stocked())
     }
 
     fn most_stocked(&self) -> ShirtColor{
