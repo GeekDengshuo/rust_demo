@@ -1,4 +1,4 @@
-use std::thread;
+use std::{thread, time::Duration};
 
 fn main()
 {
@@ -37,7 +37,15 @@ fn main()
         .unwrap();
 
 
+    let v1 = vec![1,2,3,4];
+    let v2: Vec<_> = v1.iter().map(|x| x +1 ).collect();
+
+    assert_eq!(v2,vec![2,3,4,5]);
+
+
 }
+
+
 #[derive(Debug,PartialEq,Copy,Clone)]
 enum ShirtColor {
     Red,
