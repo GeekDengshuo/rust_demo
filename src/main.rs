@@ -1,5 +1,6 @@
-use std::{thread, time::Duration};
+use std::thread;
 
+mod foo;
 fn main()
 {
     let store = Inventory{
@@ -41,6 +42,8 @@ fn main()
     let v2: Vec<_> = v1.iter().map(|x| x +1 ).collect();
 
     assert_eq!(v2,vec![2,3,4,5]);
+
+    foo::hello();
 
 
 }
