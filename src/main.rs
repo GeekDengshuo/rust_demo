@@ -1,4 +1,5 @@
 use std::thread;
+use std::ops::Deref;
 
 mod foo;
 fn main()
@@ -45,7 +46,24 @@ fn main()
 
     foo::hello();
 
+    let x = 5;
+    let y = Box::new(5);
+    let z = MyBox::new(5);
 
+    assert_eq!(5,x);
+    assert_eq!(5,*y);
+
+    assert_eq!(5,*z);
+
+
+}
+
+struct MyBox<T>(T);
+
+impl<T> Deref for MyBox<T> {
+    fn new(x:T) -> MyBox<T>{
+        MyBox(x)
+    }
 }
 
 
