@@ -1,74 +1,41 @@
-use std::thread;
+use std::mem;
 
+#[allow(dead_code)]
 fn main()
 {
-    let store = Inventory{
-        shirts: vec![ShirtColor::Red,ShirtColor::Blue,ShirtColor::Blue],
-    };
-    let user_preferences = vec![Some(ShirtColor::Red),None,Some(ShirtColor::Blue)];
-    
-    for user_pref in user_preferences{
-        let giveaway = store.giveaway(user_pref);
-        println!("The user with preference {:?} get {:?}",
-        user_pref,giveaway);
+    println!("Hello,Rust !");
+
+    #[allow(unused_variables)]
+    let arr: [i32;5] = [1,2,3,4,5];
+    let arr2 :[i32;100] = [0;100];
+
+
+    for i in arr.iter(){
+        println!("{}",i);
     }
 
-    let example_closure = |x| x;
-    let _s = example_closure(String::from("hello"));
-    //let n = example_closure(5);
-
-    let mut mutable_list = vec![1,2,3];
-    println!("Before defining closure: {:?}",mutable_list);
-
-    let mut mut_borrows = || mutable_list.push(4);
-
-    //println!("Before calling closure:{:?}",mutable_list);
-
-    mut_borrows();
-
-    println!("After calling closure:{:?}",mutable_list);
-
-
-    let list = vec![1,2,3,4,5];
-    println!("Before defining closure:{:?}",list);
-    // move can force get ownership
-    thread::spawn(move || println!("From thread : {:?}",list))
-        .join()
-        .unwrap();
-
-
-}
-#[derive(Debug,PartialEq,Copy,Clone)]
-enum ShirtColor {
-    Red,
-    Blue,
-}
-
-struct Inventory{
-    shirts: Vec<ShirtColor>,
-}
-
-impl Inventory{
-    fn giveaway(&self,user_preference: Option<ShirtColor>) -> ShirtColor{
-        user_preference.unwrap_or_else(|| self.most_stocked())
-    }
-
-    fn most_stocked(&self) -> ShirtColor{
-        let mut num_red = 0;
-        let mut num_blue = 0;
-
-        for color in &self.shirts{
-            match color{
-                ShirtColor::Red => num_red += 1,
-                ShirtColor::Blue => num_blue += 1,
-            }
-        }
-        if num_red > num_blue{
-            ShirtColor::Red
-        }else{
-            ShirtColor::Blue
+    for i in 0..arr.len() + 2{
+        let cur = arr.get(i);
+        match cur {
+            Some(cur) => println!("{}",cur),
+            None => println!("Out of range"),
         }
     }
+
+    borrow_arr_as_slice(&arr2);
+
+    borrow_arr_as_slice(&arr[1..3]);
+
+    // array is stack allocated
+    println!("array occupies {} bytes",mem::size_of_val(&arr));
+
+
+
+}
+pub fn borrow_arr_as_slice(slice:&[i32])
+{
+    println!("first element of the slice:{}",slice[0]);
+    println!("the slice has {} elements",slice.len());
 }
 
 mod tests{
