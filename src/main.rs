@@ -1,8 +1,11 @@
+
 use std::mem;
+
 
 #[allow(dead_code)]
 fn main()
 {
+
     println!("Hello,Rust !");
 
     #[allow(unused_variables)]
