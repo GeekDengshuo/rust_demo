@@ -1,14 +1,20 @@
 
 use std::mem;
 
-
 #[allow(dead_code)]
+
+// constants
+static LANGUAGE: &str = "Rust";
+
+
 fn main()
 {
-
-    println!("Hello,Rust !");
-
     #[allow(unused_variables)]
+    println!("Hello,Rust !");
+    let hello_cargo: &'static str = "Hello,Cargo!";
+    println!("{}",hello_cargo);
+
+    
     let arr: [i32;5] = [1,2,3,4,5];
     let arr2 :[i32;100] = [0;100];
 
