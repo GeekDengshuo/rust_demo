@@ -1,5 +1,7 @@
 
 use std::mem;
+use std::convert::From;
+use std::fmt;
 
 #[allow(dead_code)]
 
@@ -9,9 +11,36 @@ static LANGUAGE: &str = "Rust";
 // scope and shadowing
 
 // type casting
+#[derive(Debug)]
+struct Number{
+    value:i32,
+}
+
+impl From<i32> for Number{
+    fn from(item:i32) -> Self{
+        Number{value:item}
+    }
+}
 
 fn main()
 {
+        let num1 = Number::from(50);
+        println!("My number is {:?}",num1);
+
+        let int = 25;
+        let num:Number = int.into();
+        
+        println!("My num is {:?}",num);
+
+        let parsed:i32 = "5".parse().unwrap();
+
+        let turbo_parsed = "10".parse::<i32>().unwrap();
+
+        println!("parsed = {}, turbo_parsed = {}",parsed,turbo_parsed);
+
+
+        let my_str = "hello";
+        let my_string = String::from(my_str);
 
         // Suffixed literals, their types are known at initialization
         let x = 1u8;
