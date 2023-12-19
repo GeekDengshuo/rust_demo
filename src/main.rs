@@ -21,42 +21,86 @@ impl From<i32> for Number{
         Number{value:item}
     }
 }
+// loop
+
+// match
 
 fn main()
 {
-        let num1 = Number::from(50);
-        println!("My number is {:?}",num1);
 
-        let int = 25;
-        let num:Number = int.into();
+    let triple = (0, -2, 3);
+    // TODO ^ Try different values for `triple`
+
+    println!("Tell me about {:?}", triple);
+    // Match can be used to destructure a tuple
+    match triple {
+        // Destructure the second and third elements
+        (0, y, z) => println!("First is `0`, `y` is {:?}, and `z` is {:?}", y, z),
+        (1, ..)  => println!("First is `1` and the rest doesn't matter"),
+        (.., 2)  => println!("last is `2` and the rest doesn't matter"),
+        (3, .., 4)  => println!("First is `3`, last is `4`, and the rest doesn't matter"),
+        // `..` can be used to ignore the rest of the tuple
+        _      => println!("It doesn't matter what they are"),
+        // `_` means don't bind the value to a variable
+    }
+
+    let mut count = 0u32;
+    loop{
+
+        count+=1;
+        if count == 3{
+            println!("three");
+            continue;
+        }
+        println!("{}",count);
         
-        println!("My num is {:?}",num);
+        if count == 5 {
+            println!("OK,that's enough");
+            break;
+        }
 
-        let parsed:i32 = "5".parse().unwrap();
+    }
 
-        let turbo_parsed = "10".parse::<i32>().unwrap();
+    let names = vec!["Bob","Frank","Ferris"];
+    for name in names.iter(){
+        match name {
+            &"Ferris" => println!("There is a rustacean among us!"),
+            _ => println!("Hello {}",name),
+        }
+    }
+    let num1 = Number::from(50);
+    println!("My number is {:?}",num1);
 
-        println!("parsed = {}, turbo_parsed = {}",parsed,turbo_parsed);
-
-
-        let my_str = "hello";
-        let my_string = String::from(my_str);
-
-        // Suffixed literals, their types are known at initialization
-        let x = 1u8;
-        let y = 2u32;
-        let z = 3f32;
+    let int = 25;
+    let num:Number = int.into();
     
-        // Unsuffixed literals, their types depend on how they are used
-        let i = 1;
-        let f: f64 = 1.0;
+    println!("My num is {:?}",num);
+
+    let parsed:i32 = "5".parse().unwrap();
+
+    let turbo_parsed = "10".parse::<i32>().unwrap();
+
+    println!("parsed = {}, turbo_parsed = {}",parsed,turbo_parsed);
+
+
+    let my_str = "hello";
+    let my_string = String::from(my_str);
+
+    // Suffixed literals, their types are known at initialization
+    let x = 1u8;
+    let y = 2u32;
+    let z = 3f32;
     
-        // `size_of_val` returns the size of a variable in bytes
-        println!("size of `x` in bytes: {}", std::mem::size_of_val(&x));
-        println!("size of `y` in bytes: {}", std::mem::size_of_val(&y));
-        println!("size of `z` in bytes: {}", std::mem::size_of_val(&z));
-        println!("size of `i` in bytes: {}", std::mem::size_of_val(&i));
-        println!("size of `f` in bytes: {}", std::mem::size_of_val(&f));
+    // Unsuffixed literals, their types depend on how they are used
+    let i = 1;
+    let f: f64 = 1.0;
+    
+    // `size_of_val` returns the size of a variable in bytes
+    println!("size of `x` in bytes: {}", std::mem::size_of_val(&x));
+    println!("size of `y` in bytes: {}", std::mem::size_of_val(&y));
+    println!("size of `z` in bytes: {}", std::mem::size_of_val(&z));
+    println!("size of `i` in bytes: {}", std::mem::size_of_val(&i));
+    println!("size of `f` in bytes: {}", std::mem::size_of_val(&f));
 
     let decimal = 65.4312_f32;
     
