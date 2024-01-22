@@ -25,8 +25,48 @@ impl From<i32> for Number{
 
 // match
 
-fn main()
-{
+#[cfg(target_os = "linux")]
+fn are_you_on_linux(){
+    println!("You are running linux!");
+}
+
+//Generic
+struct MyVal{
+    val : i32
+}
+
+struct MyGenVal<T>{
+    val : T
+}
+
+impl MyVal{
+    fn get_val(&self) -> &i32 {
+        &self.val
+    }
+}
+
+impl <T> MyGenVal<T> {
+    fn get_val(&self) -> &T {
+        &self.val
+    }
+}
+
+fn main(){
+
+    let my_val = MyVal{val:10};
+    let my_gen_val = MyGenVal{val:"string"};
+    let my_gen_val2 = MyGenVal{val:10};
+
+    println!("my_val = {},my_gen_val = {},my_gen_val2 = {}",
+            my_val.get_val(),
+            my_gen_val.get_val(),
+            my_gen_val2.get_val());
+
+    //crate_test::public_function();
+
+    //crate_test::private_function();
+
+    //crate_test::indirect_access();
 
     let triple = (0, -2, 3);
     // TODO ^ Try different values for `triple`
