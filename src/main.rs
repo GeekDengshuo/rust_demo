@@ -57,7 +57,14 @@ fn destroy_box(c:Box<i32>){
 }
 
 // borrowing
+#[derive(Debug)]
 struct Point { x: i32, y: i32, z: i32 }
+
+// lifetimes
+#[allow(dead_code)]
+fn printf_ref_with_lifetimes<'a,'b>(x: &'a i32,y: &'b i32){
+    println!("x = {},y = {}",x,y);
+}
 
 
 
