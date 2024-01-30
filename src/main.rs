@@ -66,9 +66,40 @@ fn printf_ref_with_lifetimes<'a,'b>(x: &'a i32,y: &'b i32){
     println!("x = {},y = {}",x,y);
 }
 
+// marco
+macro_rules! say_hello {
+    () => {
+        println!("Hello!");
+    };
+}
+// marco param use $ prefix
+macro_rules! create_function {
+    ($func_name:ident) => {
+        fn $func_name(){
+            println!("called{:?}()",
+                        stringify!($func_name))
+        }
+    };
+}
+
+create_function!(foo);
+create_function!(bar);
+
+macro_rules! print_result {
+    ($expression:expr) => {
+        println!("{:?} = {:?}",
+                  stringify!($expression),
+                  $expression)
+    };
+}
+
 
 
 fn main(){
+    foo();
+    bar();
+    print_result!(1u32 + 1);
+    say_hello!();
 
     let mut point = Point { x: 0, y: 0, z: 0 };
 
